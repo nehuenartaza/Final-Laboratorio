@@ -3,3 +3,8 @@
 #include <string.h>
 #define dimInt 30
 #define dimChar 50
+
+int main
+{
+  return 0;
+}
