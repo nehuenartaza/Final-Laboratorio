@@ -41,6 +41,37 @@ typedef struct {
 
 int main
 {
+	int opcion = 0, inicio = 1;
+	printf ( "Para entrar al menu ingrese 1\n" );
+	scanf ( "%d", &inicio );
+	while ( inicio == 1 ) {
+		drawmenu_principal();
+		scanf ( "%d", &opcion );
+		switch ( opcion ) {
+		case 0:
+			inicio = 0;
+			break;
+		case 1:
+			drawmenu_1();
+			scanf ( "%d", &opcion );
+			switch ( opcion ) {
+			case 1:
+				registrar_astronauta();
+				break;
+			case 2:
+				registrar_nave();
+				break;
+			case 3:
+				registrar_mision();
+				break;
+			case 4:
+				
+				break;
+			}
+		default:
+			printf ( "opcion inexistente\n" );	
+		}
+	}
   	return 0;
 }
 
@@ -174,4 +205,24 @@ void guardar_mision(STmision mision)
 		fwrite(&mision, sizeof(STmision), 1, archivo);
 		fclose(archivo);
 	}
+}
+
+
+
+drawmenu_principal()
+{
+	printf ( "1- Registrar\n" );
+	printf ( "2- Modificar\n" );
+	printf ( "3- Consultar\n" );
+	printf ( "0- Cerrar programa\n" );
+	printf ( "opcion..." );
+}
+
+drawmenu_1()
+{
+	printf ( "1 | 1- Registrar astronautas\n" );
+	printf ( "1 | 2- Registrar naves\n" );
+	printf ( "1 | 3- Registrar misiones\n" );
+	printf ( "1 | 4- Regresar al menu principal\n" );
+	printf ( "opcion..." );
 }
