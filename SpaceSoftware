@@ -76,7 +76,42 @@ void registrar_astronauta()
 		scanf ( "%d", &opcion );
 }
 
-guardar_astronauta(STastronauta user)
+void guardar_astronauta(STastronauta user)
 {
-	FILE *archivo = fopen(astronautas, "a+b");
+	FILE *archivo = fopen(astronautas, "ab");
+	if ( archivo != NULL ) {
+		fwrite (&user, sizeof(STastronauta), 1, archivo);
+		fclose(archivo);
+	}
 }
+
+void cargar_nave()
+{
+	STnave ship;
+	int opcion = 1;
+	int opcion_nave = 0;
+	while ( opcion == 1 ) {
+		printf ( "ID de la nave:\n" );
+		scanf ( "%d", &ship.ID );
+		printf ( "Tipo de nave:\n" );
+		scanf ( "%d", &ship.tipo_nave );
+		while ( ship.tipo_nave < 0 && ship.tipo_nave > 3 ) {
+			printf ( "No existe esa nave, intente de nuevo\n" );
+			scanf ( "%d", &ship.tipo_nave );
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
