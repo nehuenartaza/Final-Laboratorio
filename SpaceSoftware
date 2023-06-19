@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define dimInt 30
+#define dimInt 15
 #define dimChar 50
 #define astronautas "astronauts.bin"
 #define naves "ships.bin"
@@ -44,7 +44,6 @@ int main
   	return 0;
 }
 
-
 void registrar_astronauta()
 {
 	STastronauta user;
@@ -58,6 +57,8 @@ void registrar_astronauta()
 		gets ( user.apodo );
 		printf ( "Su ID:\n" );
 		scanf ( "%d", &user.ID );
+		//Lorenzo: crear la funcion de validar que no se repitan las ID de astronautas
+
 		printf ( "Su edad:\n" );
 		scanf ( "%d", &user.edad );
 		printf ( "Nacionalidad:\n );
@@ -74,44 +75,103 @@ void registrar_astronauta()
 		guardar_astronauta(user);
 		printf ( "para registrar otro astronauta ingrese 1:\n" );
 		scanf ( "%d", &opcion );
+	}
 }
 
 void guardar_astronauta(STastronauta user)
 {
 	FILE *archivo = fopen(astronautas, "ab");
 	if ( archivo != NULL ) {
-		fwrite (&user, sizeof(STastronauta), 1, archivo);
+		fwrite(&user, sizeof(STastronauta), 1, archivo);
 		fclose(archivo);
 	}
 }
 
-void cargar_nave()
+void registrar_nave()
 {
 	STnave ship;
 	int opcion = 1;
-	int opcion_nave = 0;
 	while ( opcion == 1 ) {
 		printf ( "ID de la nave:\n" );
 		scanf ( "%d", &ship.ID );
-		printf ( "Tipo de nave:\n" );
+		//Lorenzo: crear la funcion que verifique que no se repitan las ID de naves
+
+		printf ( "Tipo de nave: 1-Starship, 2-Falcon 9, 3-Falcon Heavy\n" );
 		scanf ( "%d", &ship.tipo_nave );
-		while ( ship.tipo_nave < 0 && ship.tipo_nave > 3 ) {
-			printf ( "No existe esa nave, intente de nuevo\n" );
+		while ( ship.tipo_nave < 0 || ship.tipo_nave > 3 ) {
+			printf ( "No existe esa nave, intente de nuevo:\n" );
 			scanf ( "%d", &ship.tipo_nave );
 		}
+		printf ( "Cantidad de vuelos:\n );
+		scanf ( "%d", &ship.vuelos );
+		printf ( "Horas de vuelo:\n );
+		scanf ( "%d", &ship.horas_vuelo );
+		ship.estado = 1; //lo registra automaticamente en 'lista para su uso'
+		guardar_nave(ship);
+		printf ( "para registrar otra nave ingrese 1:\n" );
+		scanf ( "%d", &opcion );
 	}
 
 }
 
+void guardar_nave(STnave ship)
+{
+	FILE *archivo = fopen(naves, "ab");
+	if ( archivo != NULL ) {
+		fwrite(&ship, sizeof(STnave), 1, archivo);
+		fclose(archivo);
+	}
+}
+
+void registrar_mision()
+{
+	STmision mision;
+	int opcion = 1, i = 0; //contador de tripulantes por mision
+	while ( opcion == 1 && ) {
+		printf ( "ID de la mision\n" );
+		scanf ( "%d", &mision.ID );
+		//Lorenzo: crear la funcion que verifique que no se repitan las ID de misiones
+
+		printf ( "ID de la nave:\n" );
+		scanf ( "%d", &mision.ID_nave );
+		//Lorenzo: crear la funcion que verifique si existe el ID de la nave
+
+		printf ( "destino de la mision: 1-EEI, 2-orbita terrestre, 3-luna\n" );
+		scanf ( "%d", &mision.destino );
+		while ( mision.destino < 0 || mision.destino > 3 ) {
+			printf ( "destino desconocido, intente de nuevo\n" );
+			scanf ( "%d", &mision.destino );
+		}
+		printf ( "tipo de cargamento de la mision: 1-satelite, 2-insumos para la EE\n" );
+		scanf ( "%d", &mision.cargamento );
+		while ( mision.cargamento < 0 || mision.cargamento > 2 ) {
+			printf ( "cargamento desconocido, intente de nuevo\n" );
+			scanf ( "%d", &mision.cargamento );
+		}
+		printf ( "Ingrese las ID de los tripulantes que van a estar presentes en la mision: (hasta %d tripulantes)\n", dimInt );
+		while ( opcion == 1 && i < dimInt ) {
+			scanf ( "%d", &mision.tripulantes[i] );
+
+			//Lorenzo: crear la funcion para verificar que el tripulante exista, no este de baja y no este en otra mision
 
 
+			i++;
+			printf ( "para meter otro tripulante ingrese 1:\n" );
+			scanf ( "%d", &opcion );
+		}
+		printf ( "agregue una breve descripcion de la mision: (%d caracteres)\n", dimChar );
+		gets ( mision.detalle_mision );
+		guardar_mision(mision);
+		printf ( "para registrar otra mision ingrese 1:\n" );
+		scanf ( "%d", &opcion );
+	}
+}
 
-
-
-
-
-
-
-
-
-
+void guardar_mision(STmision mision)
+{
+	FILE *archivo = fopen(misiones, "ab");
+	if ( archivo != NULL ) {
+		fwrite(&mision, sizeof(STmision), 1, archivo);
+		fclose(archivo);
+	}
+}
