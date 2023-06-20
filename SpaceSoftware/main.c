@@ -328,6 +328,8 @@ void mostrar_al_astronauta(int posicion)
     }
 }
 
+
+
 void registrar_nave() //crear la funcion que verifique que no se repitan las ID de naves
 {
 	STnave ship;
@@ -464,6 +466,8 @@ void registrar_mision() //muchas funciones por hacer
 		scanf ( "%d", &opcion );
 	}
 }
+
+
 
 void guardar_mision(STmision mision)
 {
