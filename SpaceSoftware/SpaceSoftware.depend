@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1687290292 source:c:\users\nehue\documents\final-laboratorio\spacesoftware\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
