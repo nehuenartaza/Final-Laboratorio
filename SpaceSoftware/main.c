@@ -40,6 +40,7 @@ typedef struct {
 int main()
 {
 	int opcion = 0, inicio = 1;
+	char confirmador = NULL;
 	printf ( "Para entrar al menu ingrese 1\n" );
 	scanf ( "%d", &inicio );
 	while ( inicio == 1 ) {
@@ -69,6 +70,7 @@ int main()
 		default:
 			printf ( "opcion inexistente\n" );
 		}
+		system("cls");
 	}
   	return 0;
 }
@@ -207,7 +209,7 @@ void guardar_mision(STmision mision)
 
 
 
-drawmenu_principal()
+void drawmenu_principal()
 {
 	printf ( "1- Registrar\n" );
 	printf ( "2- Modificar\n" );
@@ -216,7 +218,7 @@ drawmenu_principal()
 	printf ( "opcion..." );
 }
 
-drawmenu_1()
+void drawmenu_1()
 {
 	printf ( "1 | 1- Registrar astronautas\n" );
 	printf ( "1 | 2- Registrar naves\n" );
