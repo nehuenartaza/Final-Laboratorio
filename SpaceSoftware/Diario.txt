@@ -1,1 +1,1 @@
-hola
+19/06: Nehuen hizo las estructuras, la  carga de astronautas, naves y misiones y el guardado de las mismas en sus respectivos archivos, comenzó el menú del programa
