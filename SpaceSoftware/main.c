@@ -3,11 +3,9 @@
 #include <string.h>
 #define dimInt 15
 #define dimChar 50
-#define astronautas "astronauts.bin"
-#define naves "ships.bin"
-#define misiones "missions.bin"
-#define retirados "astronauts_retired.bin"
-#define naves_de_baja "ships_retired.bin"
+#define Fastronautas "astronauts"
+#define Fnaves "ships"
+#define Fmisiones "missions"
 
 typedef struct {
 	char nombre[dimChar];
@@ -39,7 +37,7 @@ typedef struct {
 	char detalle_mision[dimChar]; //breve descripcion
 } STmision;
 
-int main
+int main()
 {
 	int opcion = 0, inicio = 1;
 	printf ( "Para entrar al menu ingrese 1\n" );
@@ -65,11 +63,11 @@ int main
 				registrar_mision();
 				break;
 			case 4:
-				
+
 				break;
 			}
 		default:
-			printf ( "opcion inexistente\n" );	
+			printf ( "opcion inexistente\n" );
 		}
 	}
   	return 0;
@@ -82,9 +80,9 @@ void registrar_astronauta()
 	while ( opcion == 1 ) {
 		printf ( "Nombre del astronauta:\n" );
 		gets ( user.nombre );
-		printf ( "Apellido del astronauta:\n );
+		printf ( "Apellido del astronauta:\n" );
 		gets ( user.apellido );
-		printf ( "Apodo del astronauta:\n );
+		printf ( "Apodo del astronauta:\n" );
 		gets ( user.apodo );
 		printf ( "Su ID:\n" );
 		scanf ( "%d", &user.ID );
@@ -92,11 +90,11 @@ void registrar_astronauta()
 
 		printf ( "Su edad:\n" );
 		scanf ( "%d", &user.edad );
-		printf ( "Nacionalidad:\n );
+		printf ( "Nacionalidad:\n" );
 		gets ( user.nacionalidad );
 		printf ( "Especialidad:\n" );
 		gets ( user.nacionalidad );
-		printf ( "Horas de vuelo acumuladas:\n );
+		printf ( "Horas de vuelo acumuladas:\n" );
 		scanf ( "%d", &user.horas_vuelo );
 		printf ( "Cantidad de misiones en las que ha participado:\n" );
 		scanf ( "%d", &user.misiones );
@@ -111,7 +109,7 @@ void registrar_astronauta()
 
 void guardar_astronauta(STastronauta user)
 {
-	FILE *archivo = fopen(astronautas, "ab");
+	FILE *archivo = fopen(Fastronautas, "ab");
 	if ( archivo != NULL ) {
 		fwrite(&user, sizeof(STastronauta), 1, archivo);
 		fclose(archivo);
@@ -133,13 +131,13 @@ void registrar_nave()
 			printf ( "No existe esa nave, intente de nuevo:\n" );
 			scanf ( "%d", &ship.tipo_nave );
 		}
-		printf ( "Cantidad de vuelos:\n );
+		printf ( "Cantidad de vuelos:\n" );
 		scanf ( "%d", &ship.vuelos );
-		printf ( "Horas de vuelo:\n );
+		printf ( "Horas de vuelo:\n" );
 		scanf ( "%d", &ship.horas_vuelo );
 		ship.estado = 1; //lo registra automaticamente en 'lista para su uso'
 		guardar_nave(ship);
-		printf ( "para registrar otra nave ingrese 1:\n" );
+		printf ( "para registrar otranave ingrese 1:\n" );
 		scanf ( "%d", &opcion );
 	}
 
@@ -147,7 +145,7 @@ void registrar_nave()
 
 void guardar_nave(STnave ship)
 {
-	FILE *archivo = fopen(naves, "ab");
+	FILE *archivo = fopen(Fnaves, "ab");
 	if ( archivo != NULL ) {
 		fwrite(&ship, sizeof(STnave), 1, archivo);
 		fclose(archivo);
@@ -158,7 +156,7 @@ void registrar_mision()
 {
 	STmision mision;
 	int opcion = 1, i = 0; //contador de tripulantes por mision
-	while ( opcion == 1 && ) {
+	while ( opcion == 1 ) {
 		printf ( "ID de la mision\n" );
 		scanf ( "%d", &mision.ID );
 		//Lorenzo: crear la funcion que verifique que no se repitan las ID de misiones
@@ -200,7 +198,7 @@ void registrar_mision()
 
 void guardar_mision(STmision mision)
 {
-	FILE *archivo = fopen(misiones, "ab");
+	FILE *archivo = fopen(Fmisiones, "ab");
 	if ( archivo != NULL ) {
 		fwrite(&mision, sizeof(STmision), 1, archivo);
 		fclose(archivo);
